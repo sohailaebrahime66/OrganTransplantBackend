@@ -994,7 +994,12 @@ class PatientCreateSerializer(serializers.Serializer):
     birthdate = serializers.DateField()
     height_cm = serializers.FloatField(required=False, allow_null=True)
     weight_kg = serializers.FloatField(required=False, allow_null=True)
-    blood_type = serializers.ChoiceField(choices=[('A','A'),('B','B'),('O','O'),('AB','AB')])
+    blood_type = serializers.ChoiceField(choices=[
+        ('A+','A+'), ('A-','A-'), ('A','A'),
+        ('B+','B+'), ('B-','B-'),
+        ('O+','O+'), ('O-','O-'),
+        ('AB+','AB+'), ('AB-','AB-'),
+        ])
     gender = serializers.ChoiceField(choices=[('male','male'),('female','female')])
     phone = serializers.CharField(required=False, allow_null=True)
     email = serializers.EmailField(required=False, allow_null=True)
