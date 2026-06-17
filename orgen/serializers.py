@@ -547,18 +547,23 @@ class UserSerializer(serializers.ModelSerializer):
             return obj.patient_profile.organ_needed
         return None
 
+    # def get_chronic_diseases(self, obj):
+    #     if obj.role == 'patient' and hasattr(obj, 'patient_profile'):
+    #         return [
+    #             {"name": uc.disease.name, "severity": uc.severity}
+    #             for uc in obj.chronic_diseases.all()
+    #         ]
+    #     elif obj.role == 'donor' and hasattr(obj, 'donor_profile'):
+    #         return [
+    #             {"name": uc.disease.name, "severity": uc.severity}
+    #             for uc in obj.chronic_diseases.all()
+    #         ]
+    #     return []
     def get_chronic_diseases(self, obj):
-        if obj.role == 'patient' and hasattr(obj, 'patient_profile'):
-            return [
-                {"name": uc.disease.name, "severity": uc.severity}
-                for uc in obj.chronic_diseases.all()
-            ]
-        elif obj.role == 'donor' and hasattr(obj, 'donor_profile'):
-            return [
-                {"name": uc.disease.name, "severity": uc.severity}
-                for uc in obj.chronic_diseases.all()
-            ]
-        return []
+        return [
+            {"name": uc.disease.name, "severity": uc.severity}
+            for uc in obj.chronic_diseases.all()
+        ]
 
     def get_hospital_detail(self, obj):
         if hasattr(obj, 'patient_profile') and obj.role == 'patient' and obj.hospital:
