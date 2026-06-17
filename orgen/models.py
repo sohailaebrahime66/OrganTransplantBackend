@@ -8,7 +8,8 @@ from django.utils import timezone
 import datetime
 from django.urls import reverse
 from django.conf import settings
-ythonfrom cloudinary_storage.storage import RawMediaCloudinaryStorage
+from cloudinary_storage.storage import RawMediaCloudinaryStorage
+
 
 
 # Custom User Manager
