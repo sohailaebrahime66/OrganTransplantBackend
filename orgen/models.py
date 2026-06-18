@@ -8,7 +8,7 @@ from django.utils import timezone
 import datetime
 from django.urls import reverse
 from django.conf import settings
-from cloudinary_storage.storage import RawMediaCloudinaryStorage
+from cloudinary_storage.storage import MediaCloudinaryStorage  
 
 
 
@@ -583,8 +583,8 @@ class Surgery(models.Model):
 class MRIReport(models.Model):
     patient = models.ForeignKey(User, on_delete=models.CASCADE, related_name='mri_reports')
     before_scan = models.FileField(upload_to='mri/before/', null=True, blank=True)
-    after_scan = models.FileField(upload_to='mri/after/', null=True, blank=True ,storage=RawMediaCloudinaryStorage(tag='public'))
-    npl_report = models.FileField(upload_to='mri/npl/', null=True, blank=True ,storage=RawMediaCloudinaryStorage(tag='public'))
+    after_scan = models.FileField(upload_to='mri/after/', null=True, blank=True ,storage=(tag='public'))
+    npl_report = models.FileField(upload_to='mri/npl/', null=True, blank=True ,storage=(tag='public'))
     ai_result = models.TextField(null=True, blank=True)
     mismatch_alert = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -683,7 +683,7 @@ class UserReport(models.Model):
 
     patient = models.ForeignKey(User, on_delete=models.CASCADE, related_name='user_reports')
     report_type = models.CharField(max_length=50, choices=type)
-    report_file = models.FileField(upload_to='user_reports/', null=True, blank=True , storage=RawMediaCloudinaryStorage(tag='public'))
+    report_file = models.FileField(upload_to='user_reports/', null=True, blank=True , storage=MediaCloudinaryStorage(tag='public'))
     description = models.TextField(null=True, blank=True)
     report_title = models.TextField(null=True, blank=True)
     state = models.CharField(max_length=20, choices=reportState, null=False)
@@ -701,8 +701,8 @@ class SurgeryReport(models.Model):
     complications = models.TextField(null=True, blank=True)
     doctor_notes = models.TextField(null=True, blank=True)
     recorded_at = models.DateTimeField(auto_now_add=True)
-    report_file = models.FileField(upload_to='surgery_reports/files/', null=True, blank=True ,storage=RawMediaCloudinaryStorage(tag='public'))
-    report_image = models.FileField(upload_to='surgery_reports/images/', null=True, blank=True ,storage=RawMediaCloudinaryStorage(tag='public'))
+    report_file = models.FileField(upload_to='surgery_reports/files/', null=True, blank=True ,storage=MediaCloudinaryStorage(tag='public'))
+    report_image = models.FileField(upload_to='surgery_reports/images/', null=True, blank=True ,storage=MediaCloudinaryStorage  (tag='public'))
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
