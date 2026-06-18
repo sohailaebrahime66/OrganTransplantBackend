@@ -683,7 +683,7 @@ class UserReport(models.Model):
 
     patient = models.ForeignKey(User, on_delete=models.CASCADE, related_name='user_reports')
     report_type = models.CharField(max_length=50, choices=type)
-    report_file = models.FileField(upload_to='user_reports/', null=True, blank=True , =MediaCloudinaryStorage(tag='public'))
+    report_file = models.FileField(upload_to='user_reports/', null=True, blank=True ,storage =MediaCloudinaryStorage(tag='public'))
     description = models.TextField(null=True, blank=True)
     report_title = models.TextField(null=True, blank=True)
     state = models.CharField(max_length=20, choices=reportState, null=False)
