@@ -582,9 +582,9 @@ class Surgery(models.Model):
 # MRI Reports
 class MRIReport(models.Model):
     patient = models.ForeignKey(User, on_delete=models.CASCADE, related_name='mri_reports')
-    before_scan = models.FileField(upload_to='mri/before/', null=True, blank=True)
+    before_scan = models.FileField(upload_to='mri/before/', null=True, blank=True , storage=MediaCloudinaryStorage(tag='public'))
     after_scan = models.FileField(upload_to='mri/after/', null=True, blank=True ,storage=MediaCloudinaryStorage(tag='public'))
-    npl_report = models.FileField(upload_to='mri/npl/', null=True, blank=True ,storage=(tag='public'))
+    npl_report = models.FileField(upload_to='mri/npl/', null=True, blank=True ,storage=MediaCloudinaryStorage(tag='public'))
     ai_result = models.TextField(null=True, blank=True)
     mismatch_alert = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -683,7 +683,7 @@ class UserReport(models.Model):
 
     patient = models.ForeignKey(User, on_delete=models.CASCADE, related_name='user_reports')
     report_type = models.CharField(max_length=50, choices=type)
-    report_file = models.FileField(upload_to='user_reports/', null=True, blank=True , storage=MediaCloudinaryStorage(tag='public'))
+    report_file = models.FileField(upload_to='user_reports/', null=True, blank=True , =MediaCloudinaryStorage(tag='public'))
     description = models.TextField(null=True, blank=True)
     report_title = models.TextField(null=True, blank=True)
     state = models.CharField(max_length=20, choices=reportState, null=False)
