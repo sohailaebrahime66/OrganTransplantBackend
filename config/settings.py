@@ -175,6 +175,8 @@ CLOUDINARY_STORAGE = {
     'STATIC_VIDEOS_EXTENSIONS': ['mp4', 'webm', 'flv', 'mov', 'ogv', '3gp', '3g2', 'wmv', 'mpeg', 'flv', 'mkv', 'avi'],
     'MAGIC_FILE_PATH': 'magic',
     'PREFIX': '',
+    'RESOURCE_TYPE': 'raw',  # أضيفي
+    'TYPE': 'upload',
 }
 STORAGES = {
     "default": {
