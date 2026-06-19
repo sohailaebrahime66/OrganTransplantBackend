@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'cloudinary',
     'cloudinary_storage',
+    'storages',
     'orgen',
     
 ]
@@ -175,13 +176,14 @@ CLOUDINARY_STORAGE = {
     'STATIC_VIDEOS_EXTENSIONS': ['mp4', 'webm', 'flv', 'mov', 'ogv', '3gp', '3g2', 'wmv', 'mpeg', 'flv', 'mkv', 'avi'],
     'MAGIC_FILE_PATH': 'magic',
     'PREFIX': '',
-    'DEFAULT_FILE_STORAGE_OPTIONS': {'resource_type': 'raw', 'access_mode': 'public'},
-
-
 }
+
+SUPABASE_URL = os.environ.get('SUPABASE_URL')
+SUPABASE_KEY = os.environ.get('SUPABASE_KEY')
+
 STORAGES = {
     "default": {
-        "BACKEND": "cloudinary_storage.storage.RawMediaCloudinaryStorage",
+        "BACKEND": "orgen.supabase_storage.SupabaseStorage",
     },
     "staticfiles": {
         "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
