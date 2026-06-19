@@ -4,6 +4,7 @@ from django.contrib.auth import authenticate
 from django.utils import timezone
 import datetime
 from rest_framework.authtoken.models import Token
+from rest_framework.exceptions import AuthenticationFailed
 
 
 # register users
@@ -105,15 +106,25 @@ class UnifiedLoginSerializer(serializers.Serializer):
 
         #  1. Ministry (5 digits only)
         if identifier.isdigit() and len(identifier) == 5:
+            # try:
+            #     ministry = Ministry.objects.get(national_id=identifier)
+            # except Ministry.DoesNotExist:
+            #     raise serializers.ValidationError({
+            #         "message": "الوزارة غير موجودة"
+            #     })
             try:
                 ministry = Ministry.objects.get(national_id=identifier)
             except Ministry.DoesNotExist:
-                raise serializers.ValidationError({
+                C({
                     "message": "الوزارة غير موجودة"
                 })
 
+            # if not ministry.check_password(password):
+            #     raise serializers.ValidationError({
+            #         "message": "كلمة مرور الوزارة غير صحيحة"
+            #     })
             if not ministry.check_password(password):
-                raise serializers.ValidationError({
+                raise AuthenticationFailed({
                     "message": "كلمة مرور الوزارة غير صحيحة"
                 })
 
@@ -129,12 +140,12 @@ class UnifiedLoginSerializer(serializers.Serializer):
             try:
                 hospital = Hospital.objects.get(email=identifier)
             except Hospital.DoesNotExist:
-                raise serializers.ValidationError({
+                 raise AuthenticationFailed({
                     "message": "المستشفى غير موجودة"
                 })
 
             if not hospital.check_password(password):
-                raise serializers.ValidationError({
+                 raise AuthenticationFailed({
                     "message": "بيانات المستشفى غير صحيحة"
                 })
 
