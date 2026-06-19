@@ -179,7 +179,8 @@ CLOUDINARY_STORAGE = {
 }
 STORAGES = {
     "default": {
-        "BACKEND": "cloudinary_storage.storage.RawMediaCloudinaryStorage",
+        # غيري من RawMediaCloudinaryStorage لـ MediaCloudinaryStorage
+        "BACKEND": "cloudinary_storage.storage.MediaCloudinaryStorage",
     },
     "staticfiles": {
         "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
