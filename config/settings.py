@@ -175,6 +175,8 @@ CLOUDINARY_STORAGE = {
     'STATIC_VIDEOS_EXTENSIONS': ['mp4', 'webm', 'flv', 'mov', 'ogv', '3gp', '3g2', 'wmv', 'mpeg', 'flv', 'mkv', 'avi'],
     'MAGIC_FILE_PATH': 'magic',
     'PREFIX': '',
+    'DEFAULT_FILE_STORAGE_OPTIONS': {'resource_type': 'raw', 'access_mode': 'public'},
+
 
 }
 STORAGES = {
@@ -185,8 +187,6 @@ STORAGES = {
         "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
     },
 }
-'DEFAULT_FILE_STORAGE_OPTIONS': {'resource_type': 'raw', 'access_mode': 'public'},
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
 
